@@ -6,6 +6,10 @@
 
 * src/static 
 
+表单设计的代码位置
+
+* src/static/view/formBuild
+
 后端服务
 
 node.js express
@@ -27,5 +31,6 @@ gulp
 
 后端
 node index.js
+
 
 
