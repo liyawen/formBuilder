@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Icon, message, Select, Input, Button, Breadcrumb } from 'antd';
 import Container from './container';
-import Service from './service';
+import Service from '../../service/formBuild';
 import './css/drop.less';
 
 const FormItem = Form.Item;
@@ -31,7 +31,9 @@ class createForm extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const requestData = Object.assign({}, values);
-        requestData.formData = this.state.formData;
+        requestData.formType = parseInt(requestData.formType, 10);
+        requestData.formKey = parseInt(requestData.formKey, 10);
+        requestData.formData = JSON.stringify(this.state.formData);
         this.addForm(requestData);
       }
     });
