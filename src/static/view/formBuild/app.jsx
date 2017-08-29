@@ -93,8 +93,6 @@ class createForm extends Component {
               )}
             </FormItem>
             <FormItem>
-              <Button type="primary" ghost>表单预览</Button>
-              &nbsp;&nbsp;
               <Button>取消</Button>
               &nbsp;&nbsp;
               <Button
