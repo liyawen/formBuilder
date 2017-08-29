@@ -5,3 +5,5 @@ function addForm(req, res) {
   const data = req.body;
   formService.sendForm(data, res);
 }
+
+exports.addForm = addForm;

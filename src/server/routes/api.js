@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require("path")
-const formController = require('../controller/formController')
+const formController = require('../controllers/formController')
 
-const api = express()
+const router = express.Router();
 
 // 是这样写吗
-api.post('/addForm', formController.addForm)
+router.post('/addForm', formController.addForm)
 
-module.exports = api;
+module.exports = router;
