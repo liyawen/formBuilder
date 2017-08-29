@@ -36,7 +36,7 @@ export default class Container extends Component {
         text: '纯文本',
         params: {},
       }],
-      dropItem: [],
+      dropItem: props.formData,
     };
   }
 
@@ -51,7 +51,9 @@ export default class Container extends Component {
           [hoverIndex, 0, dragCard],
         ],
       },
-    }));
+    }), () => {
+      this.props.getFormData(this.state.dropItem);
+    });
   }
 
   handleDrop(item) {
@@ -61,6 +63,8 @@ export default class Container extends Component {
     }, this.state.cards[item.index]));
     this.setState({
       dropItem,
+    }, () => {
+      this.props.getFormData(this.state.dropItem);
     });
   }
 
@@ -75,6 +79,8 @@ export default class Container extends Component {
     });
     this.setState({
       dropItem,
+    }, () => {
+      this.props.getFormData(this.state.dropItem);
     });
   }
 

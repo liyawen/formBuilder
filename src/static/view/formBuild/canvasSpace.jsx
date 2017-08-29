@@ -82,6 +82,9 @@ class CanvasSpace extends Component {
   getData(key, data) {
     console.log('key', key);
     console.log('data', data);
+    this.setState({
+      targetState: false,
+    });
     this.props.updateDropItem(key, data);
   }
 
@@ -111,7 +114,7 @@ class CanvasSpace extends Component {
       <div className="spaceDiv" style={{ backgroundColor }}>
         <Form>
           {dropItem.map((card, i) => (
-            <div className="cardDiv" onMouseLeave={this.toggleButtons(i)} onMouseEnter={this.toggleButtons(i)} key={card.key}>
+            <div className="cardDiv" key={card.key}>
               <Card
                 index={i}
                 id={card.id}
@@ -121,7 +124,7 @@ class CanvasSpace extends Component {
                 moveBox={this.moveBox}
                 getFieldDecorator={getFieldDecorator}
               />
-              <div hidden={buttonHidden[i]} className="configureIcon">
+              <div className="configureIcon">
                 <Button type="primary" onClick={this.setConfigure(i, card)}><Icon type="setting" /></Button>
                 &nbsp;&nbsp;
                 <Button type="danger"><Icon type="delete" /></Button>
@@ -138,3 +141,6 @@ class CanvasSpace extends Component {
 }
 const Space = Form.create()(CanvasSpace);
 export default Space;
+
+{/* <div className="cardDiv" onMouseLeave={this.toggleButtons(i)} onMouseEnter={this.toggleButtons(i)} key={card.key}> */}
+{/* <div hidden={buttonHidden[i]} className="configureIcon"> */}

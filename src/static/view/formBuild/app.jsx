@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Icon, Select, Input, Button, Breadcrumb } from 'antd';
+import { Form, Icon, message, Select, Input, Button, Breadcrumb } from 'antd';
 import Container from './container';
+import Service from './service';
 import './css/drop.less';
 
 const FormItem = Form.Item;
@@ -13,8 +14,10 @@ function hasErrors(fieldsError) {
 class createForm extends Component {
   constructor(props) {
     super(props);
+    this.getFormData = this.getFormData.bind(this);
     this.state = {
-      basicInfo: {},
+      formData: [],
+      isLoading: false
     };
   }
 
@@ -27,13 +30,47 @@ class createForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const requestData = Object.assign({}, values);
+        requestData.formData = this.state.formData;
+        this.addForm(requestData);
       }
     });
   }
 
+  addForm(requestData) {
+    console.log('values', requestData);
+    Service.addForm(requestData)
+      .then((res) => {
+        if (res.status === 0) {
+          message.success('提交成功！');
+          this.setState({
+            isLoading: false,
+          });
+        } else {
+          this.setState({
+            isLoading: false,
+          });
+          message.error(res.msg, 4);
+        }
+      })
+      .catch((error) => {
+        this.setState({
+          isLoading: false,
+        });
+        message.error(error.message, 5);
+      });
+  }
+
+  getFormData(data) {
+    this.setState({
+      formData: data,
+    });
+  }
+
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { getFieldDecorator, getFieldsError, getFieldError,
+      isFieldTouched } = this.props.form;
+    const { formData } = this.state;
     const formNameError = isFieldTouched('formName') && getFieldError('formName');
     const formKeyError = isFieldTouched('formKey') && getFieldError('formKey');
 
@@ -106,7 +143,7 @@ class createForm extends Component {
           </Form>
         </div>
         <hr />
-        <Container />
+        <Container getFormData={this.getFormData} formData={formData} />
       </div>
     );
   }
