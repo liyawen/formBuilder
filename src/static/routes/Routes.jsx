@@ -10,6 +10,7 @@ import Application from '../application';
 import home from '../view/home/app';
 import designForm from '../view/formBuild/app';
 import showForm from '../view/showForm/app';
+import previewForm from '../view/showForm/previewForm';
 
 class Routes extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class Routes extends React.Component {
           <IndexRoute component={home} />
           <Route path="/designForm" component={designForm} />
           <Route path="/showForm" component={showForm} />
+          <Route path="/previewForm/:id" component={previewForm} />
         </Route>
       </Router>
     );

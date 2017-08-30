@@ -11,13 +11,12 @@ const FormItem = Form.Item;
 
 const cardSource = {
   beginDrag(props) {
-
     return {
-      id: props.id,
-      index: props.index,
-      text: props.text,
-      type: props.type,
-      params: props.params,
+      id: props.data.id,
+      index: props.data.index,
+      text: props.data.text,
+      type: props.data.type,
+      params: props.data.params,
     };
   },
 };
@@ -54,16 +53,17 @@ const cardTarget = {
 export default class Card extends Component {
   static propTypes = {
     isDragging: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   };
 
   render() {
-    const { text, isDragging, connectDragSource, connectDropTarget,
-      type, getFieldDecorator, params } = this.props;
-    console.log('params', params)
+    const { data, isDragging, connectDragSource, connectDropTarget,
+      getFieldDecorator } = this.props;
+    const text = data.text;
+    const type = data.type;
+    const params = data.params;
     const opacity = isDragging ? 0 : 1;
     const formItemLayout = {
       labelCol: {

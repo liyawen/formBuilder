@@ -116,11 +116,8 @@ class CanvasSpace extends Component {
           {dropItem.map((card, i) => (
             <div className="cardDiv" key={card.key}>
               <Card
+                data={card}
                 index={i}
-                id={card.id}
-                text={card.text}
-                type={card.type}
-                params={card.params}
                 moveBox={this.moveBox}
                 getFieldDecorator={getFieldDecorator}
               />
